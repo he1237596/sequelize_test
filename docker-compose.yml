@@ -1,0 +1,15 @@
+version: '2.3'
+services:
+  postgres_my:
+    image: "postgres:alpine"
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: chris
+      POSTGRES_DB: pvmed-db
+      POSTGRES_INITDB_ARGS: --locale=en_US.UTF-8 --encoding=utf8
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_ADMIN_USER: admin
+      POSTGRES_ADMIN_PASSWORD: 123456
+    ports:
+      - "10001:5432"
