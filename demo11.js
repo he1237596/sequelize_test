@@ -2,7 +2,7 @@
  * @Author: Chris
  * @Date: 2021-04-09 15:22:19
  * @LastEditors: Chris
- * @LastEditTime: 2021-04-13 16:37:24
+ * @LastEditTime: 2021-04-19 12:43:22
  * @Descripttion: 批量创建 bulkCreate: validate必须显示生命
  */
 const { Sequelize, DataTypes, Model, Op } = require('sequelize');
@@ -62,6 +62,51 @@ const init = async () => {
       firstName: 'xiao',
       age: 10,
       lastName: 'heihei',
+    },
+    {
+      firstName: 'lao',
+      age: 18,
+      lastName: 'wang',
+    },
+    {
+      firstName: 'xiao',
+      age: 18,
+      lastName: 'heihei',
+    },
+    {
+      firstName: 'xiao',
+      age: 10,
+      lastName: 'heihei',
+    },
+    {
+      firstName: 'lao',
+      age: 18,
+      lastName: 'wang',
+    },
+    {
+      firstName: 'xiao',
+      age: 18,
+      lastName: 'heihei',
+    },
+    {
+      firstName: 'xiao',
+      age: 10,
+      lastName: 'heihei',
+    },
+    {
+      firstName: 'lao',
+      age: 18,
+      lastName: 'wang',
+    },
+    {
+      firstName: 'xiao',
+      age: 18,
+      lastName: 'heihei',
+    },
+    {
+      firstName: 'xiao',
+      age: 10,
+      lastName: 'heihei',
     }
   ],{
     // validate 此处是关键
@@ -77,9 +122,9 @@ const init = async () => {
     //   }
     // },
     // order: [['age', 'DESC']],
-    order: [
-      [sequelize.fn('max', sequelize.col('age')),'DESC']
-    ],
+    // order: [
+    //   [sequelize.fn('max', sequelize.col('age')),'DESC']
+    // ],
     // group: 'firstName',
     raw: true
   }).then(rows => {

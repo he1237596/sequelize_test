@@ -2,7 +2,7 @@
  * @Author: Chris
  * @Date: 2021-04-09 15:22:19
  * @LastEditors: Chris
- * @LastEditTime: 2021-04-13 15:52:23
+ * @LastEditTime: 2021-04-15 17:10:00
  * @Descripttion: sequelize.fn
  */
 const { Sequelize, DataTypes, Model } = require('sequelize');
@@ -44,7 +44,9 @@ User.init({
   age: {
     type: DataTypes.INTEGER,
     defaultValue: 10,
+    allowNull: true,
   },
+  hats: DataTypes.ARRAY(DataTypes.SMALLINT),
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -74,16 +76,18 @@ const init = async () => {
   console.log("用户模型表刚刚(重新)创建！")
   // User插入一条记录
   const jane = await User.create({
-    firstName: 'test',
+    firstName: 'test1',
     lastName: '03',
+    hats: [13]
   })
 
   await jane.increment("age",{by: 1});
   await jane.increment("age");
   await jane.increment({age: 2});
   await User.create({
-    firstName: 'test1',
-    lastName: '03',
+    firstName: 'test',
+    lastName: '05',
+    hats: [3, 3, 3]
   })
   // await jane.reload();
   // .then(res => {
@@ -102,8 +106,9 @@ const init = async () => {
     // attributes: ['firstName', 'age'],
     attributes: [
       // 'firstName',
-      [sequelize.fn('COUNT', sequelize.col('age')), 'total'],
+      [sequelize.fn('COUNT', sequelize.col('hats')), 'n_hats'],
     ],
+    // group: 'firstName',
     raw: true
   }).then(rows => {
     // raw: true返回查询的表数据,默认为false返回查询实例
@@ -113,6 +118,7 @@ const init = async () => {
   // await User.drop();
 
   // await sequelize.drop(); // 删除所有表
+  console.log(sequelize.models)
 
 }
 init();
